@@ -1,0 +1,161 @@
+import socket
+
+# Define the IP and port of the camera
+CAMERA_IP = '192.168.1.67'
+PORT = 52381  # Common port for VISCA over IP
+
+# VISCA Command to get pan-tilt position
+GET_PAN_TILT_POS_CMD = b'\x81\x09\x06\x12\xFF'
+
+
+def send_visca_command(sock, command):
+    sock.sendto(command, (CAMERA_IP, PORT))
+
+
+def receive_visca_response(sock):
+    data, _ = sock.recvfrom(1024)
+    return data
+
+
+def parse_tilt_position(data):
+    # VISCA response for pan-tilt position is expected in the form of:
+    # 8x 50 0p 0p 0p 0p 0t 0t 0t 0t FF
+    if len(data) < 11 or data[1] != 0x50:
+        print("Invalid response or no position data.")
+        return None
+
+    tilt_hex = ''.join(f'{byte:02X}' for byte in data[6:10])
+
+    return tilt_hex
+
+
+def main():
+    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+        # Bind to any available address and a random port
+        sock.bind(('0.0.0.0', 0))
+        sock.settimeout(10)
+
+        while True:
+            try:
+                # Send command to get pan-tilt position
+                send_visca_command(sock, GET_PAN_TILT_POS_CMD)
+
+                # Receive the response from the camera
+                data = receive_visca_response(sock)
+
+                # Parse and print the tilt position in hex format
+                tilt_hex = parse_tilt_position(data)
+                if tilt_hex:
+                    print(tilt_hex)
+
+            except socket.timeout:
+                print("No response from camera, retrying...")
+            except KeyboardInterrupt:
+                print("Exiting program.")
+                break
+
+
+if __name__ == "__main__":
+    main()
+
+
+00050100
+0005000A
+00040C0F
+00040C08
+00040C02
+00040B0A
+00040B04
+00040A0D
+0004060E
+00040608
+00040602
+0004050C
+00040505
+0004040E
+0004000E
+00040007
+00040000
+00030F0A
+00030F04
+00030B06
+00030A0F
+00030A08
+00030A02
+0003090C
+00030906
+00030507
+0003040F
+00030409
+00030403
+0003030C
+00020F0D
+00020F06
+00020F00
+00020E09
+00020E03
+00020D0C
+0002090E
+00020908
+00020902
+0002080C
+00020805
+00020407
+00020401
+0002030A
+00020303
+0002020C
+00020205
+00010E07
+00010E01
+00010D0A
+00010D04
+00010C0E
+00010C07
+00010808
+00010802
+0001070B
+00010704
+0001060E
+00010608
+00010601
+00010203
+0001010D
+00010106
+00010100
+0001000A
+00000C0B
+00000C05
+00000B0E
+00000B07
+00000B00
+00000A0A
+0000060C
+00000603
+0000050D
+00000507
+00000501
+0000040B
+0000000B
+00000005
+0F0F0F0E
+0F0F0F08
+0F0F0F02
+0F0F0E0C
+0F0F0A0E
+0F0F0A08
+0F0F0A02
+0F0F090B
+0F0F0905
+0F0F0507
+0F0F0501
+0F0F040B
+0F0F0404
+0F0F030D
+0F0F0306
+0F0E0F06
+0F0E0E0F
+0F0E0E08
+0F0E0E02
+0F0E0D0B
+0F0E0D04

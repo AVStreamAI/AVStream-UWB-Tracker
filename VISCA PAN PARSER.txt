@@ -1,0 +1,54 @@
+import socket
+
+# Define the IP and port of the camera
+CAMERA_IP = '192.168.1.67'
+PORT = 52381  # Common port for VISCA over IP
+
+# VISCA Command to get pan-tilt position
+GET_PAN_TILT_POS_CMD = b'\x81\x09\x06\x12\xFF'
+
+def send_visca_command(sock, command):
+    sock.sendto(command, (CAMERA_IP, PORT))
+
+def receive_visca_response(sock):
+    data, _ = sock.recvfrom(1024)
+    return data
+
+def parse_pan_position(data):
+    # VISCA response for pan-tilt position is expected in the form of:
+    # 8x 50 0p 0p 0p 0p 0t 0t 0t 0t FF
+    if len(data) < 11 or data[1] != 0x50:
+        print("Invalid response or no position data.")
+        return None
+    
+    pan_hex = ''.join(f'{byte:02X}' for byte in data[2:6])
+
+    return pan_hex
+
+def main():
+    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+        # Bind to any available address and a random port
+        sock.bind(('0.0.0.0', 0))
+        sock.settimeout(10)
+        
+        while True:
+            try:
+                # Send command to get pan-tilt position
+                send_visca_command(sock, GET_PAN_TILT_POS_CMD)
+                
+                # Receive the response from the camera
+                data = receive_visca_response(sock)
+                
+                # Parse and print the pan position in hex format
+                pan_hex = parse_pan_position(data)
+                if pan_hex:
+                    print(pan_hex)
+                
+            except socket.timeout:
+                print("No response from camera, retrying...")
+            except KeyboardInterrupt:
+                print("Exiting program.")
+                break
+
+if __name__ == "__main__":
+    main()
