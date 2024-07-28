@@ -5,6 +5,8 @@ The main idea is to create tracking device, that can be wired in the Artist, and
 
 Please keep in mind that you sould have phisical ESP32 from Makerfabs to make this project live.
 
+**I don't provide any technical support on this project, so you can adjust and configure it in your own way.**
+
 I've used as ANCHORS:
 ![image](https://github.com/user-attachments/assets/fb5a7468-4486-4ceb-8390-29fee5c816b5)
 
@@ -74,3 +76,6 @@ It's more complicated, but you can handle it i believe.
 16. Now try to move the TAG in physical world, so you will see the PTZ should move somewhere.
 17. Calibrate the HEX positions, PTZ placement, ANCHORS placement to achieve correct PTZ movement.
 18. Enjoy.
+
+My tg: https://t.me/Kvanterbreher
+My tg channel: https://t.me/avstream
