@@ -3,7 +3,7 @@ Almost stage-ready tracking system for artists tracking and controlling DMX, PTZ
 
 The main idea is to create tracking device, that can be wired in the Artist, and then this Artist walking on the stage (in the Theater for example) and DMX lighting, PTZ cameras and even Audio Monitoring or Immersive system follows this Artist. So you see the lights are moving itself and follow Artist, the sound mixing automatically in monitoring system and PTZ cameras follows Artist and making autonomous streaming or/and video recording.
 
-Please keep in mind that you sould have phisical ESP32 from Makerfabs to make this project live.
+Please keep in mind that you should have **phisical ESP32** from Makerfabs to make this project live.
 
 **I don't provide any technical support on this project, so you can adjust and configure it in your own way.**
 
@@ -24,7 +24,10 @@ Using Makerfabs ESP32 and Touchdesigner
 1. Unzip (or unrar) libraries.rar
 2. Install Arduino software
 3. Open AVSstream_Anchor.txt and AVStream_TAG.txt in the Arduino software and copy-paste the code and convert to Arduino files
-4. Install all libraries from archive libraries.rar
+4. Install all libraries from archive libraries.rar (maybe some of them are not neccessary, but I provide the project as it works for me)
+
+![image](https://github.com/user-attachments/assets/1638b518-eef1-4bd0-9772-225348c60a62)
+
 5. In the TAG file there are ajustable parameters in the top of the code, such are: Wifi Credentials, udpAddress, UDP Port, Calibration settings, floating distance, UWB configuration, Display configuration. Also don't forget to define TAG_ADDress.
 6. In the ANCHOR file you only need to define your ANCHOR_ADD that will match your phisical device
 ![image](https://github.com/user-attachments/assets/fc1b9137-90b2-45cb-b729-33a5ea438197)
