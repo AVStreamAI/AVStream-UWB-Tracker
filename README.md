@@ -80,5 +80,9 @@ It's more complicated, but you can handle it i believe.
 17. Calibrate the HEX positions, PTZ placement, ANCHORS placement to achieve correct PTZ movement.
 18. Enjoy.
 
+I don't remember which part of which source codes i've used on this project, because i've doing it time-to-time for almost 8 months at my free time. So if you find any parts of your code, please send me a message and i will indicate your involvement.
+
+The most of the final code and python scripts for Touchdesigner are created with OpenAI ChatGPT4 and then 4o.
+
 My tg: https://t.me/Kvanterbreher
 My tg channel: https://t.me/avstream
