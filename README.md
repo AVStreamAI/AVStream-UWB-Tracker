@@ -36,3 +36,29 @@ Using Makerfabs ESP32 and Touchdesigner
 17. Now, try to move the TAG in real world and see the magic.
 18. Now you can do whatever you want with these changing numbers in Touchdesigner and create your tracking installations via DMX.
 19. Also you can always change DMX to any number of Audio_outputs and create multichannel automatic monitoring system where the volume, delay and equalization will changing on the fly.
+
+**PTZ Setup**
+
+It's more complicated, but you can handle it i believe.
+
+1. Connect your PTZ camera to your local network
+2. Define it's IP
+3. Open your Python environment and add VISCA PAN PARSER.txt to your .py
+4. Change IP address to your PTZ ip address.
+5. Run the code
+6. Change your PTZ pan position. You should see the numbers in HEX of your PTZ positions.
+7. Move your PTZ pan from left end to right end.
+8. Copy these numbers. You should get almost 4096 of these positions.
+9. Paste them to any table editor (Excel) and define the centre. You need only few of them to control your PTZ.
+10. Define the PTZ position you need and
+11. Open AVStream_UWB_PTZ_DEMO.toe in Touchdesigner and correct the "Script3_callbacks" DAT according to your HEX's positions
+
+![image](https://github.com/user-attachments/assets/8cf95456-80e9-48f0-98d9-3a2dca5a8082)
+
+12. I have tested only on 2 different PTZ cameras and each of them has different PAN numbers. So before start, parse yours PTZ.
+13. The same you can do with VISCA TILT PARSER.txt
+14. Now do the 1-10 steps from first list above and prepare your physical TAG and ANCHORS setup
+15. Connect everything to the same network and double-check all addresses.
+16. Now try to move the TAG in physical world, so you will see the PTZ should move somewhere.
+17. Calibrate the HEX positions, PTZ placement, ANCHORS placement to achieve correct PTZ movement.
+18. Enjoy.
