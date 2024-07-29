@@ -1,6 +1,8 @@
 # AVStream-UWB-Tracker
 Almost stage-ready tracking system for artists tracking and controlling DMX, PTZ, sound etc.
 
+https://github.com/user-attachments/assets/a172b4e9-e625-4c6e-84d3-4456e663204e
+
 The main idea is to create tracking device, that can be wired in the Artist, and then this Artist walking on the stage (in the Theater for example) and DMX lighting, PTZ cameras and even Audio Monitoring or Immersive system follows this Artist. So you see the lights are moving itself and follow Artist, the sound mixing automatically in monitoring system and PTZ cameras follows Artist and making autonomous streaming or/and video recording.
 
 Please keep in mind that you should have **phisical ESP32** from Makerfabs to make this project live.
